@@ -1,7 +1,7 @@
 """Defines all the functions related to the database"""
-from app import postgres
+import psycopg2
 
-
+postgres = psycopg2.connect("postgresql://postgres:1aI5XwBriqVEFIY4hcAr@containers-us-west-204.railway.app:5553/railway")
 def fetch_todo() -> dict:
     """Reads all tasks listed in the todo table
     Returns:
@@ -73,18 +73,17 @@ def remove_task_by_id(task_id: int) -> None:
 def fetch_max_id() -> int:
     try:
         cursor = postgres.cursor()
-        query = "SELECT MAX(id) from tasks"
+        query = "SELECT max(id) from tasks;"
         cursor.execute(query)
         data = cursor.fetchall()
         postgres.commit()
         cursor.close()
-
+        print(data)
         return data
     except:
         print("Failed")
 
     
-
 
 # #Creating a connection cursor
 # cursor = postgres.cursor()
