@@ -53,7 +53,7 @@ def fetch_max_id():
     result= db_helper.fetch_max_id()
     return jsonify(result)
 
-@app.route("/edit/",methods=['PUT'])
+@app.route("/edit",methods=['PUT'])
 def edit():
     data = request.get_json()
     db_helper.update_task_entry(data['id'],data['description'])
